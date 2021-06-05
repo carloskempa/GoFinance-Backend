@@ -12,25 +12,52 @@ namespace GoFinance.Data.Mapping
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
             builder.HasKey(c => c.Id);
-            builder.Property(c => c.Nome).IsRequired();
 
+            builder.Property(c => c.Nome)
+                   .IsRequired()
+                   .HasColumnName("Nome")
+                   .HasColumnType("varchar(100)");
             
+            builder.Property(c => c.Login)
+                   .IsRequired()
+                   .HasColumnName("Login")
+                   .HasColumnType("varchar(50)");
 
-            // 1 : N => Usuario : Categorias
-            builder.HasMany(c => c.Categorias)
-                   .WithOne(c => c.Usuario)
-                   .HasForeignKey(c => c.Id);
+            builder.OwnsOne(c => c.Email, cm =>
+            {
+                cm.Property(c => c.Endereco)
+                  .HasColumnName("Email")
+                  .HasColumnType("varchar(200)");
+            });
 
-            // 1 : N => Usuario : Fornecedores
-            builder.HasMany(c => c.Fornecedores)
-                   .WithOne(c => c.Usuario)
-                   .HasForeignKey(c => c.Id);
+            builder.Property(c => c.Senha)
+                   .IsRequired()
+                   .HasColumnName("Senha")
+                   .HasColumnType("varbinary(max)");
 
-            // 1 : N => Usuario : ContaFinanceira
-            builder.HasMany(c => c.ContaFinanceiras)
-                   .WithOne(c => c.Usuario)
-                   .HasForeignKey(c => c.Id);
+            builder.Property(c => c.TokenAlteracaoSenha)
+                   .HasColumnName("TokenAlteracaoSenha")
+                   .HasColumnType("varchar(100)");
 
+            builder.Property(c => c.DataExpiracaoToken)
+                   .HasColumnName("DataExpiracaoToken")
+                   .HasColumnType("datetime");
+
+            builder.Property(c => c.RefleshToken)
+                   .HasColumnName("RefleshToken")
+                   .HasColumnType("varchar(100)");
+
+            builder.Property(c => c.Ativo)
+                   .IsRequired()
+                   .HasColumnName("Ativo")
+                   .HasColumnType("bool");
+
+            builder.Property(c => c.DtCadastro)
+                   .IsRequired()
+                   .HasColumnName("DtCadastro")
+                   .HasColumnType("datetime");
+
+            builder.ToTable("Usuarios");
         }
     }
 }

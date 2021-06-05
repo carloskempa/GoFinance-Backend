@@ -20,6 +20,8 @@ namespace GoFinance.Domain.Entities
             Codigo = codigo;
             Ativo = ativo;
             UsuarioId = usuarioId;
+
+            Validar();
         }
         protected Categoria() { }
 

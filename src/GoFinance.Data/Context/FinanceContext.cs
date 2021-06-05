@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GoFinance.Domain.Core.Data;
+using GoFinance.Domain.Core.Messages;
 using GoFinance.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,12 +23,13 @@ namespace GoFinance.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
+               e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
+                property.Relational().ColumnType = "varchar(100)";
+
+            modelBuilder.Ignore<Event>();
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(FinanceContext).Assembly);
-
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) 
-                relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
-
-            base.OnModelCreating(modelBuilder);
         }
 
         public async Task<bool> Commit()
