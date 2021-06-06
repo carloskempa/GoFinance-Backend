@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using GoFinance.Domain.Core.DomainObjects;
 using GoFinance.Domain.Core.ValuesObjects;
+using GoFinance.Domain.Enuns;
 
 namespace GoFinance.Domain.Entities
 {
     public class Usuario : Entity, IAggregateRoot
     {
-        public Usuario(string nome, string login, byte[] senha, Email email, bool ativo)
+        public Usuario(string nome, string login, byte[] senha, Email email, bool ativo, Perfil perfil)
         {
             Nome = nome;
             Login = login;
             Senha = senha;
             Email = email;
             Ativo = ativo;
+            Perfil = perfil;
+
+            Validar();
         }
         protected Usuario() { }
 
@@ -21,6 +25,7 @@ namespace GoFinance.Domain.Entities
         public string Login { get; private set; }
         public byte[] Senha { get; private set; }
         public Email Email { get; private set; }
+        public Perfil Perfil { get; set; }
         public string TokenAlteracaoSenha { get; private set; }
         public DateTime? DataExpiracaoToken { get; private set; }
         public string RefleshToken { get; private set; }
@@ -70,6 +75,7 @@ namespace GoFinance.Domain.Entities
             Validacoes.ValidarSeVazio(Nome, "O campo Nome não pode estar vazio");
             Validacoes.ValidarSeVazio(Login, "O campo Login não pode estar vazio");
             Validacoes.ValidarSeNulo(Senha, "O campo Senha não pode estar vazio");
+            Validacoes.ValidarSeIgual(Perfil, 0, "O campo pérfil deve ser preenchido.");
         }
     }
 }

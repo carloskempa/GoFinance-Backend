@@ -15,6 +15,8 @@ namespace GoFinance.Domain.Entities
             CategoriaId = categoriaId;
             UsuarioId = usuarioId;
             FornecedorId = fornecedorId;
+
+            Validar();
         }
 
         public string Nome { get; private set; }
@@ -28,15 +30,16 @@ namespace GoFinance.Domain.Entities
         public Usuario Usuario { get; private set; }
         public Fornecedor Fornecedor { get; private set; }
 
-        private readonly List<Parcela> _movimentoItems;
-        public IReadOnlyCollection<Parcela> MovimentoItems => _movimentoItems;
+        private readonly List<Parcela> _parcelas;
+        public IReadOnlyCollection<Parcela> Parcelas => _parcelas;
+        public ICollection<Movimento> Movimentos { get; private set; }
 
-        public void AdicionarItem(Parcela item)
+        public void AdicionarParcela(Parcela parcela)
         {
-            item.Validar();
-            item.AssociarMovimento(Id);
+            parcela.Validar();
+            parcela.AssociarConta(Id);
 
-            _movimentoItems.Add(item);
+            _parcelas.Add(parcela);
         }
 
         public override void Validar()

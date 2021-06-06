@@ -14,6 +14,8 @@ namespace GoFinance.Domain.Entities
             Usuario = usuario;
             Senha = senha;
             SSL = ssl;
+
+            Validar();
         }
 
         protected Smtp() { }

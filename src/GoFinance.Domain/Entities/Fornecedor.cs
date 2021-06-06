@@ -7,7 +7,7 @@ namespace GoFinance.Domain.Entities
     public class Fornecedor : Entity
     {
         public string Nome { get; private set; }
-        public CnpjCpf Cnpj { get; private set; }
+        public CnpjCpf CnpjCpf { get; private set; }
         public string UrlSite { get; private set; }
         public string Descricao { get; private set; }
         public bool Ativo { get; private set; }
@@ -21,11 +21,13 @@ namespace GoFinance.Domain.Entities
             Descricao = descricao;
             Ativo = ativo;
             UsuarioId = usuarioId;
+
+            Validar();
         }
         protected Fornecedor() { }
         public override string ToString()
         {
-            return $"{ Cnpj} { Nome }";
+            return $"{ CnpjCpf} { Nome }";
         }
 
         public void Ativar() => Ativo = true;

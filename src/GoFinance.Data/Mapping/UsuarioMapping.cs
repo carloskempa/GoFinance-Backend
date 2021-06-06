@@ -30,6 +30,11 @@ namespace GoFinance.Data.Mapping
                   .HasColumnType("varchar(200)");
             });
 
+            builder.Property(c => c.Perfil)
+                   .IsRequired()
+                   .HasColumnName("Perfil")
+                   .HasColumnType("int");
+
             builder.Property(c => c.Senha)
                    .IsRequired()
                    .HasColumnName("Senha")

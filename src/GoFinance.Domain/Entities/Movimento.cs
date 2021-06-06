@@ -15,6 +15,8 @@ namespace GoFinance.Domain.Entities
             TipoMovimento = tipoMovimento;
             ContaPagarId = contaPagarId;
             ContaFinanceiraId = contaFinanceiraId;
+
+            Validar();
         }
         protected Movimento() { }
 

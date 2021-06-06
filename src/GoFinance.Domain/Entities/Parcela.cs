@@ -14,6 +14,8 @@ namespace GoFinance.Domain.Entities
             DtCompetencia = dtCompetencia;
             DtVencimento = dtVencimento;
             StatusParcela = StatusParcela.Aberto;
+
+            Validar();
         }
         protected Parcela() { }
 
@@ -32,13 +34,11 @@ namespace GoFinance.Domain.Entities
         public ContaFinanceira ContaFinanceira { get; private set; }
         public ContasPagar ContaPagar { get; private set; }
 
-
         public override void Validar()
         {
             Validacoes.ValidarSeIgual(Valor, 0, "O valor não pode ser zerado.");
             Validacoes.ValidarSeIgual(NumeroParcela, 0, "O número da parcela não pode ser zerado.");
         }
-
 
         public void PagarParcela(decimal valor, Guid contafinanceiraid, decimal? multa = null, decimal? juros = null, decimal? desconto = null)
         {
@@ -53,12 +53,9 @@ namespace GoFinance.Domain.Entities
             ContaFinanceiraId = contafinanceiraid;
         }
 
-
-        internal void AssociarMovimento(Guid contaPagarId)
+        internal void AssociarConta(Guid contaPagarId)
         {
             ContaPagarId = contaPagarId;
         }
-
-
     }
 }
