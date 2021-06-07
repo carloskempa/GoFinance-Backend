@@ -1,10 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using FluentValidation.Results;
 using MediatR;
 
 namespace GoFinance.Domain.Core.Messages
 {
-    public abstract class Command<T> : Message, IRequest<T>
+    public abstract class Command : Message, IRequest<bool>
     {
         public DateTime Timestamp { get; private set; }
         public ValidationResult ValidationResult { get; set; }

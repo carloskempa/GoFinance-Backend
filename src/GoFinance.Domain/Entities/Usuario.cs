@@ -25,7 +25,7 @@ namespace GoFinance.Domain.Entities
         public string Login { get; private set; }
         public byte[] Senha { get; private set; }
         public Email Email { get; private set; }
-        public Perfil Perfil { get; set; }
+        public Perfil Perfil { get; private set; }
         public string TokenAlteracaoSenha { get; private set; }
         public DateTime? DataExpiracaoToken { get; private set; }
         public string RefleshToken { get; private set; }

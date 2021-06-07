@@ -23,5 +23,9 @@ namespace GoFinance.Domain.Interfaces.Repositories
         void Deletar(ContasPagar contasPagar);
         void DeletarTodos(IEnumerable<ContasPagar> contasPagar);
 
+        //Parcela
+        void Adicionar(Parcela parcela);
+        void AdicionarTodos(IEnumerable<Parcela> parcelas);
+        void DeletarTodos(IEnumerable<Parcela> parcelas);
     }
 }

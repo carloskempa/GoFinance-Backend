@@ -11,7 +11,8 @@ namespace GoFinance.Domain.Interfaces.Repositories
         //Usuario
         Task<IEnumerable<Usuario>> ObterTodos();
         Task<Usuario> ObterPorId(Guid id);
-        Task<Usuario> ObterPorLogin(int login);
+        Task<Usuario> ObterPorLogin(string login);
+        Task<Usuario> ObterPorEmail(string email);
         Task<Usuario> ObterPorRefreshToken(string token);
         Task<Usuario> ObterPorTokenAlterarSenha(string token);
 

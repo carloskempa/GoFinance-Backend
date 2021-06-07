@@ -11,7 +11,7 @@ namespace GoFinance.Data.Context
     public class FinanceContext : DbContext, IUnitOfWork
     {
         public FinanceContext(DbContextOptions<FinanceContext> options) : base(options)
-        {  }
+        { }
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
@@ -20,6 +20,7 @@ namespace GoFinance.Data.Context
         public DbSet<Parcela> Parcelas { get; set; }
         public DbSet<Smtp> Smtp { get; set; }
         public DbSet<Movimento> Movimentos { get; set; }
+        public DbSet<ContasPagar> ContasPagar { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
