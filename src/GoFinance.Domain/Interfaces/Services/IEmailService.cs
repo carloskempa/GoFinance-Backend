@@ -8,6 +8,6 @@ namespace GoFinance.Domain.Interfaces.Services
 {
     public interface IEmailService
     {
-        Task Enviar(Smtp smtp);
+        Task Enviar(Smtp smtp, string email,string title, string body);
     }
 }

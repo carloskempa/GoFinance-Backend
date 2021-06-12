@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GoFinance.Domain.Core\GoFinance.Domain.Core.csproj" />
     <ProjectReference Include="..\GoFinance.Domain\GoFinance.Domain.csproj" />
-    <ProjectReference Include="..\GoFinances.Infra.Helpers\GoFinances.Infra.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

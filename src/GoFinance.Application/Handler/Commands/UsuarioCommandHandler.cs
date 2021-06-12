@@ -1,4 +1,5 @@
 ﻿using GoFinance.Application.Commands;
+using GoFinance.Application.Events;
 using GoFinance.Domain.Core.Communication.Mediator;
 using GoFinance.Domain.Core.Messages;
 using GoFinance.Domain.Core.Messages.CommonMessages.Notifications;
@@ -12,7 +13,9 @@ using System.Threading.Tasks;
 
 namespace GoFinance.Application.Handler.Commands
 {
-    public class UsuarioCommandHandler : IRequestHandler<AdicionarUsuarioCommand, bool>
+    public class UsuarioCommandHandler : IRequestHandler<AdicionarUsuarioCommand, bool>,
+                                         IRequestHandler<AuthenticarUsuarioCommand, bool>,
+                                         IRequestHandler<ResetarSenhaUsuarioCommand, bool>
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IMediatorHandler _mediatorHandler;
@@ -47,6 +50,54 @@ namespace GoFinance.Application.Handler.Commands
             return await _usuarioRepository.UnitOfWork.Commit();
         }
 
+        public async Task<bool> Handle(AuthenticarUsuarioCommand request, CancellationToken cancellationToken)
+        {
+            if (!ValidarComando(request))
+                return false;
+
+            var usuario = await _usuarioRepository.ObterPorLogin(request.Login);
+
+            if(usuario == null)
+            {
+                await _mediatorHandler.PublicarNotificacao(new DomainNotification(request.MessageType, "Usuário e senha inválidos."));
+                return false;
+            }
+
+            var senhaUsuario = _criptografiaService.Encrypt(request.Senha);
+
+            if (!usuario.Senha.Equals(senhaUsuario))
+            {
+                await _mediatorHandler.PublicarNotificacao(new DomainNotification(request.MessageType, "Usuário e senha inválidos."));
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> Handle(ResetarSenhaUsuarioCommand request, CancellationToken cancellationToken)
+        {
+            if (!ValidarComando(request))
+                return false;
+
+            var usuario = await _usuarioRepository.ObterPorEmail(request.Email);
+
+            if (usuario == null)
+            {
+                await _mediatorHandler.PublicarNotificacao(new DomainNotification(request.MessageType, "Usuário não encontrado com e-mail informado"));
+                return false;
+            }
+
+            usuario.CriarTokenAlteracaoSenha();
+
+            _usuarioRepository.Atualizar(usuario);
+            await _usuarioRepository.UnitOfWork.Commit();
+
+            usuario.AdicionarEvento(new EnviarEmailResetarSenhaUsuarioEvent(usuario.Id, request.));
+
+            return true;
+        }
+
+
 
 
         private async Task<bool> VerificarSeEmailJaExiste(string email)
@@ -67,5 +118,7 @@ namespace GoFinance.Application.Handler.Commands
 
             return false;
         }
+
+        
     }
 }

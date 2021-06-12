@@ -9,8 +9,10 @@ namespace GoFinance.Domain.Entities
         public string Nome { get; private set; }
         public int Codigo { get; private set; }
         public bool Ativo { get; private set; }
-        public Guid UsuarioId { get; set; }
+        public Guid UsuarioId { get; private set; }
         public Usuario Usuario { get; private set; }
+
+        //Ef
         public ICollection<ContasPagar> ContasPagar { get; set; }
 
 
@@ -28,6 +30,15 @@ namespace GoFinance.Domain.Entities
 
         public void Ativar() => Ativo = true;
         public void Inativar() => Ativo = false;
+
+        public void Atualizar(string nome, int codigo)
+        {
+            Validacoes.ValidarSeVazio(Nome, "O campo Nome da Categoria não pode estar vazio");
+            Validacoes.ValidarSeIgual(Codigo, 0, "O campo Código da Categoria não pode estar vazio");
+
+            Nome = nome;
+            Codigo = codigo;
+        }
 
         public override void Validar()
         {
