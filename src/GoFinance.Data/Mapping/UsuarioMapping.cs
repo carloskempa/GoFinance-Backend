@@ -52,10 +52,14 @@ namespace GoFinance.Data.Mapping
                    .HasColumnName("RefleshToken")
                    .HasColumnType("varchar(100)");
 
+            builder.Property(c => c.DataExpiracaoRefleshToken)
+                   .HasColumnName("DataExpiracaoRefleshToken")
+                   .HasColumnType("datetime");
+
             builder.Property(c => c.Ativo)
                    .IsRequired()
                    .HasColumnName("Ativo")
-                   .HasColumnType("bool");
+                   .HasColumnType("bit");
 
             builder.Property(c => c.DtCadastro)
                    .IsRequired()

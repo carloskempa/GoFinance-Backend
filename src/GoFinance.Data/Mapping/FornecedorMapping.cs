@@ -36,7 +36,7 @@ namespace GoFinance.Data.Mapping
             builder.Property(c => c.Ativo)
                    .IsRequired()
                    .HasColumnName("Ativo")
-                   .HasColumnType("bool");
+                   .HasColumnType("bit");
 
             builder.HasOne(c => c.Usuario)
                    .WithMany(c => c.Fornecedores)

@@ -51,7 +51,7 @@ namespace GoFinance.Data.Mapping
                    .HasColumnName("DtCadastro")
                    .HasColumnType("datetime");
 
-            builder.ToTable("Smtp");
+            builder.ToTable("Movimentos");
         }
     }
 }

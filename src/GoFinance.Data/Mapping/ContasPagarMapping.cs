@@ -31,15 +31,18 @@ namespace GoFinance.Data.Mapping
 
             builder.HasOne(c => c.Usuario)
                    .WithMany(c => c.ContasPagar)
-                   .HasForeignKey(c => c.UsuarioId);
+                   .HasForeignKey(c => c.UsuarioId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(c => c.Categoria)
                    .WithMany(c => c.ContasPagar)
-                   .HasForeignKey(c => c.CategoriaId);
+                   .HasForeignKey(c => c.CategoriaId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(c => c.Fornecedor)
                    .WithMany(c => c.ContasPagar)
-                   .HasForeignKey(c => c. FornecedorId);
+                   .HasForeignKey(c => c. FornecedorId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(c => c.DtCadastro)
                    .IsRequired()

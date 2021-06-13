@@ -23,6 +23,11 @@ namespace GoFinance.Data.Mapping
                    .HasColumnName("Codigo")
                    .HasColumnType("int");
 
+            builder.Property(c => c.Ativo)
+                   .IsRequired()
+                   .HasColumnName("Ativo")
+                   .HasColumnType("bit");
+
             builder.HasOne(c => c.Usuario)
                    .WithMany(c => c.Categorias)
                    .HasForeignKey(c => c.UsuarioId);

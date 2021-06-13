@@ -18,6 +18,7 @@ namespace GoFinance.Domain.Entities
 
             Validar();
         }
+        protected ContasPagar() { }
 
         public string Nome { get; private set; }
         public int NumeroParcelas { get; private set; }

@@ -72,7 +72,6 @@ namespace GoFinance.Domain.Entities
 
                 return movimento;
             }
-
             public static Movimento Saque(Guid contaFinanceiraId, decimal valor)
             {
                 var movimento = new Movimento

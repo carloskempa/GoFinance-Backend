@@ -1,9 +1,13 @@
 ﻿using GoFinance.Application.Commands;
+using GoFinance.Application.Events;
 using GoFinance.Application.Handler.Commands;
 using GoFinance.Data.Context;
 using GoFinance.Data.Repository;
+using GoFinance.Domain.Core.Communication.Mediator;
 using GoFinance.Domain.Core.Messages.CommonMessages.Notifications;
 using GoFinance.Domain.Interfaces.Repositories;
+using GoFinance.Domain.Interfaces.Services;
+using GoFinance.Domain.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,19 +19,34 @@ namespace GoFinance.Service.Setup
     {
         public static IServiceCollection AddDependencies(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+            services.AddMediatR(typeof(Startup));
+            services.AddDbContext<FinanceContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
             AddQueries(services);
             AddRepositories(services);
             AddHandlers(services);
+            AddEvents(services);
+            AddServices(services);
 
-            services.AddMediatR(typeof(Startup));
-            services.AddDbContext<FinanceContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
 
             return services;
         }
 
         private static void AddQueries(IServiceCollection services)
         {
+        }
+
+        private static void AddEvents(IServiceCollection services)
+        {
+            services.AddScoped<INotificationHandler<EnviarEmailResetarSenhaUsuarioEvent>, UsuarioEventHandler>();
+        }
+
+        public static void AddServices(IServiceCollection services)
+        {
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ICriptografiaService, CriptografiaService>();
         }
 
         private static void AddRepositories(IServiceCollection services)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using GoFinance.Data.Mapping;
 using GoFinance.Domain.Core.Data;
 using GoFinance.Domain.Core.Messages;
 using GoFinance.Domain.Entities;
@@ -24,13 +25,15 @@ namespace GoFinance.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
-               e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
-                property.Relational().ColumnType = "varchar(100)";
-
             modelBuilder.Ignore<Event>();
-
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(FinanceContext).Assembly);
+            modelBuilder.ApplyConfiguration(new CategoriaMapping());
+            modelBuilder.ApplyConfiguration(new ContaFinanceiraMapping());
+            modelBuilder.ApplyConfiguration(new ContasPagarMapping());
+            modelBuilder.ApplyConfiguration(new FornecedorMapping());
+            modelBuilder.ApplyConfiguration(new MovimentoMapping());
+            modelBuilder.ApplyConfiguration(new ParcelaMapping());
+            modelBuilder.ApplyConfiguration(new SmtpMapping());
+            modelBuilder.ApplyConfiguration(new UsuarioMapping());
         }
 
         public async Task<bool> Commit()

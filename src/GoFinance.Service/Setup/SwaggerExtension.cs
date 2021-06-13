@@ -38,3 +38,4 @@ namespace GoFinance.Service.Setup
             return services;
         }
     }
+}
