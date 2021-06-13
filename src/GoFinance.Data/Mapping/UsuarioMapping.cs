@@ -30,10 +30,10 @@ namespace GoFinance.Data.Mapping
                   .HasColumnType("varchar(200)");
             });
 
-            builder.Property(c => c.Perfil)
+            builder.Property(c => c.Administrador)
                    .IsRequired()
-                   .HasColumnName("Perfil")
-                   .HasColumnType("int");
+                   .HasColumnName("Administrador")
+                   .HasColumnType("bit");
 
             builder.Property(c => c.Senha)
                    .IsRequired()

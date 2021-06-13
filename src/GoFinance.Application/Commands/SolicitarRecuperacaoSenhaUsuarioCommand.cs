@@ -3,9 +3,9 @@ using GoFinance.Domain.Core.Messages;
 
 namespace GoFinance.Application.Commands
 {
-    public class ResetarSenhaUsuarioCommand : Command
+    public class SolicitarRecuperacaoSenhaUsuarioCommand : Command
     {
-        public ResetarSenhaUsuarioCommand(string email, string urlSite)
+        public SolicitarRecuperacaoSenhaUsuarioCommand(string email, string urlSite)
         {
             Email = email;
             UrlSite = urlSite;
@@ -21,7 +21,7 @@ namespace GoFinance.Application.Commands
         }
     }
 
-    public class ResetarSenhaUsuarioValidator : AbstractValidator<ResetarSenhaUsuarioCommand>
+    public class ResetarSenhaUsuarioValidator : AbstractValidator<SolicitarRecuperacaoSenhaUsuarioCommand>
     {
         public ResetarSenhaUsuarioValidator()
         {

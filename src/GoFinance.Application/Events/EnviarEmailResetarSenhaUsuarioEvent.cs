@@ -1,16 +1,17 @@
 ﻿using GoFinance.Domain.Core.Messages;
+using GoFinance.Domain.Entities;
 using System;
 
 namespace GoFinance.Application.Events
 {
     public class EnviarEmailResetarSenhaUsuarioEvent : Event
     {
-        public Guid UsuarioId { get;private set; }
+        public Usuario Usuario { get;private set; }
         public string UrlSite { get; private set; }
-        public EnviarEmailResetarSenhaUsuarioEvent(Guid usuarioId, string urlSite)
+        public EnviarEmailResetarSenhaUsuarioEvent(Usuario usuario, string urlSite)
         {
-            AggregateId = usuarioId;
-            UsuarioId = usuarioId;
+            AggregateId = usuario.Id;
+            Usuario = usuario;
             UrlSite = urlSite;
         }
     }

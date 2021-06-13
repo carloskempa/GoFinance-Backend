@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using GoFinance.Domain.Entities;
+﻿using GoFinance.Domain.Entities;
 using GoFinance.Domain.Interfaces.Services;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace GoFinance.Domain.Services
 {
@@ -29,7 +26,7 @@ namespace GoFinance.Domain.Services
             {
                 await client.SendMailAsync(mail);
             }
-            catch (System.Exception erro)
+            catch
             {
                 //trata erro
             }

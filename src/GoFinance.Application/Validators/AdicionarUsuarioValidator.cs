@@ -14,6 +14,9 @@ namespace GoFinance.Application.Validators
             RuleFor(c => c.Senha).MaximumLength(20).WithMessage("O campo Senha não pode ter mais de 20 caracteres");
             RuleFor(c => c.Senha).MinimumLength(6).WithMessage("O campo Senha tem que ter no minímo 6 caracteres");
             RuleFor(c => c.Senha).NotNull().NotEmpty().WithMessage("O campo Senha não pode estar vazio");
+            RuleFor(c => c.Email).NotNull().NotEmpty().WithMessage("O campo E-mail não pode estar vazio");
+            RuleFor(c => c.Email).MaximumLength(200).WithMessage("O campo E-mail não pode ter mais de 200 caracteres");
+            RuleFor(c => c.Email).EmailAddress().WithMessage("E-mail inválido");
         }
     }
 }

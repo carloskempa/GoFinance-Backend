@@ -59,7 +59,12 @@ namespace GoFinance.Data.Repository
         {
             return await _context.ContasPagar.AsNoTracking().Where(c => c.UsuarioId == usuarioId).ToListAsync();
         }
-
+        
+        public async Task<IEnumerable<ContasPagar>> ObterContaPagarPorCategoria(Guid categoriaId)
+        {
+            return await _context.ContasPagar.AsNoTracking().Where(c => c.CategoriaId == categoriaId).ToListAsync();
+        }
+    
         public void Adicionar(ContasPagar contasPagar)
         {
             _context.ContasPagar.Add(contasPagar);
@@ -108,5 +113,6 @@ namespace GoFinance.Data.Repository
         {
             _context.Dispose();
         }
+        
     }
 }

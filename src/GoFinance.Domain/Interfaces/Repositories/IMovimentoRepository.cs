@@ -17,6 +17,7 @@ namespace GoFinance.Domain.Interfaces.Repositories
 
         //ContaPagar
         Task<IEnumerable<ContasPagar>> ObterTodosContaPagar(Guid usuarioId);
+        Task<IEnumerable<ContasPagar>> ObterContaPagarPorCategoria(Guid categoriaId);
         Task<ContasPagar> ObterContaPagarPorId(Guid id);
         void Adicionar(ContasPagar contasPagar);
         void Atualizar(ContasPagar contasPagar);

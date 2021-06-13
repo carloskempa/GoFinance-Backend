@@ -8,14 +8,14 @@ namespace GoFinance.Domain.Entities
 {
     public class Usuario : Entity, IAggregateRoot
     {
-        public Usuario(string nome, string login, byte[] senha, Email email, bool ativo, Perfil perfil)
+        public Usuario(string nome, string login, byte[] senha, Email email, bool ativo, bool administrador)
         {
             Nome = nome;
             Login = login;
             Senha = senha;
             Email = email;
             Ativo = ativo;
-            Perfil = perfil;
+            Administrador = administrador;
 
             Validar();
         }
@@ -25,10 +25,11 @@ namespace GoFinance.Domain.Entities
         public string Login { get; private set; }
         public byte[] Senha { get; private set; }
         public Email Email { get; private set; }
-        public Perfil Perfil { get; private set; }
+        public bool Administrador { get; private set; }
         public string TokenAlteracaoSenha { get; private set; }
         public DateTime? DataExpiracaoToken { get; private set; }
         public string RefleshToken { get; private set; }
+        public DateTime? DataExpiracaoRefleshToken { get; private set; }
         public bool Ativo { get; private set; }
 
 
@@ -65,17 +66,25 @@ namespace GoFinance.Domain.Entities
         public bool ValidarDataAlteracaoSenhaEstaExpirado()
         {
             if (DataExpiracaoToken.Value < DateTime.Now)
-                return false;
+                return true;
 
-            return true;
+            return false;
         }
         public void CriarRefreshToken() => RefleshToken = Guid.NewGuid().ToString().Replace("-", "");
+        public void Atualizar(string nome, string login, Email email, bool ativo, bool administrador)
+        {
+            Nome = nome;
+            Login = login;
+            Email = email;
+            Ativo = ativo;
+            Administrador = administrador;
+        }
+
         public override void Validar()
         {
             Validacoes.ValidarSeVazio(Nome, "O campo Nome não pode estar vazio");
             Validacoes.ValidarSeVazio(Login, "O campo Login não pode estar vazio");
             Validacoes.ValidarSeNulo(Senha, "O campo Senha não pode estar vazio");
-            Validacoes.ValidarSeIgual(Perfil, 0, "O campo pérfil deve ser preenchido.");
         }
     }
 }
