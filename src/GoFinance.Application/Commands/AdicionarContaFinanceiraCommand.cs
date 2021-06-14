@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using GoFinance.Domain.Core.Messages;
+﻿using GoFinance.Domain.Core.Messages;
 using System;
 
 namespace GoFinance.Application.Commands
@@ -25,13 +24,6 @@ namespace GoFinance.Application.Commands
         {
             ValidationResult = new AdicionarContaFinanceiraValitator().Validate(this);
             return ValidationResult.IsValid;
-        }
-    }
-    public class AdicionarContaFinanceiraValitator : AbstractValidator<AdicionarContaFinanceiraCommand>
-    {
-        public AdicionarContaFinanceiraValitator()
-        {
-
         }
     }
 

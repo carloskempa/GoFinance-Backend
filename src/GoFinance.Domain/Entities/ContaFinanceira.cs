@@ -6,12 +6,13 @@ namespace GoFinance.Domain.Entities
 {
     public class ContaFinanceira : Entity, IAggregateRoot
     {
-        public ContaFinanceira(string nome, string banco, string descricao, decimal saldo, Guid usuarioId)
+        public ContaFinanceira(string nome, string banco, string descricao, decimal saldo, bool ativo, Guid usuarioId)
         {
             Nome = nome;
             Banco = banco;
             Descricao = descricao;
             Saldo = saldo;
+            Ativo = ativo;
             UsuarioId = usuarioId;
 
             Validar();
@@ -28,6 +29,8 @@ namespace GoFinance.Domain.Entities
         public ICollection<Movimento> Movimentos { get; private set; }
         public ICollection<Parcela> Parcelas { get; private set; }
 
+        public void Desativar() => Ativo = false;
+
         public override void Validar()
         {
             Validacoes.ValidarSeVazio(Nome, "O campo do Nome da canta deve ser preenchida.");
@@ -36,6 +39,16 @@ namespace GoFinance.Domain.Entities
             Validacoes.ValidarSeIgual(UsuarioId, Guid.Empty, "O campo do UsuarioId deve ser preenchida.");
         }
 
+        public void Atualizar(string nome, string banco, string descricao, decimal saldo, bool ativo)
+        {
+            Nome = nome;
+            Banco = banco;
+            Descricao = descricao;
+            Saldo = saldo;
+            Ativo = ativo;
+
+            Validar();
+        }
 
         public void AdicionarSaldo(decimal valor)
         {

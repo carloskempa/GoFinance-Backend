@@ -1,13 +1,20 @@
-﻿using FluentValidation;
+﻿using System;
+using FluentValidation;
 using GoFinance.Domain.Core.Messages;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GoFinance.Application.Commands
 {
     public class DeletarContaFinanceiraCommand : Command
     {
+        public DeletarContaFinanceiraCommand(Guid contaFinanceiraId, Guid usuarioId)
+        {
+            ContaFinanceiraId = contaFinanceiraId;
+            UsuarioId = usuarioId;
+        }
+
+        public Guid ContaFinanceiraId { get; private set; }
+        public Guid UsuarioId { get; private set; }
+
         public override bool EhValido()
         {
             ValidationResult = new DeletarContaFinanceiraValidator().Validate(this);
@@ -18,7 +25,8 @@ namespace GoFinance.Application.Commands
     {
         public DeletarContaFinanceiraValidator()
         {
-
+            RuleFor(c => c.ContaFinanceiraId).NotEqual(Guid.Empty).WithMessage("Id da conta financeira é inválido");
+            RuleFor(c => c.UsuarioId).NotEqual(Guid.Empty).WithMessage("Id do usuário inválido");
         }
     }
 }

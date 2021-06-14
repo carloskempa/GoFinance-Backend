@@ -10,16 +10,16 @@ namespace GoFinance.Domain.Interfaces.Repositories
     public interface IMovimentoRepository : IRepository<Movimento>
     {
         //Movimento
+        IQueryable<Movimento> ObterMovimentos();
         Task<IEnumerable<Movimento>> ObterTodos(Guid usuarioId);
         Task<Movimento> ObterPorId(Guid id);
         void Adicionar(Movimento movimento);
         void Atualizar(Movimento movimento);
 
-
         //ContaPagar
+        IQueryable<ContasPagar> ObterContasPagar();
         Task<IEnumerable<ContasPagar>> ObterTodosContaPagar(Guid usuarioId);
         Task<IEnumerable<ContasPagar>> ObterContaPagarPorCategoria(Guid categoriaId);
-        IQueryable<ContasPagar> ObterContaPagar();
         Task<ContasPagar> ObterContaPagarPorId(Guid id);
         void Adicionar(ContasPagar contasPagar);
         void Atualizar(ContasPagar contasPagar);
@@ -27,6 +27,7 @@ namespace GoFinance.Domain.Interfaces.Repositories
         void DeletarTodos(IEnumerable<ContasPagar> contasPagar);
 
         //Parcela
+        IQueryable<Parcela> ObterParcelas();
         void Adicionar(Parcela parcela);
         void AdicionarTodos(IEnumerable<Parcela> parcelas);
         void DeletarTodos(IEnumerable<Parcela> parcelas);

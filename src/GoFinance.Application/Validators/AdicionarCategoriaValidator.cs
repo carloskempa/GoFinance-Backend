@@ -11,8 +11,7 @@ namespace GoFinance.Application.Validators
 
         public AdicionarCategoriaValidator()
         {
-            RuleFor(c => c.Nome).NotNull()
-                                .NotEmpty()
+            RuleFor(c => c.Nome).NotEmpty()
                                 .WithMessage("O campo Nome da Categoria não pode estar vazio");
 
             RuleFor(c => c.Codigo).LessThanOrEqualTo(0)

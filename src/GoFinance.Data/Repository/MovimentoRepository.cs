@@ -23,6 +23,10 @@ namespace GoFinance.Data.Repository
 
         #region Movimento
 
+        public IQueryable<Movimento> ObterMovimentos()
+        {
+            return _context.Movimentos;
+        }
 
         public async Task<Movimento> ObterPorId(Guid id)
         {
@@ -50,6 +54,11 @@ namespace GoFinance.Data.Repository
 
         #region ContasPagar
 
+        public IQueryable<ContasPagar> ObterContasPagar()
+        {
+            return _context.ContasPagar;
+        }
+
         public async Task<ContasPagar> ObterContaPagarPorId(Guid id)
         {
             return await _context.ContasPagar.FindAsync(id);
@@ -59,12 +68,12 @@ namespace GoFinance.Data.Repository
         {
             return await _context.ContasPagar.AsNoTracking().Where(c => c.UsuarioId == usuarioId).ToListAsync();
         }
-        
+
         public async Task<IEnumerable<ContasPagar>> ObterContaPagarPorCategoria(Guid categoriaId)
         {
             return await _context.ContasPagar.AsNoTracking().Where(c => c.CategoriaId == categoriaId).ToListAsync();
         }
-    
+
         public void Adicionar(ContasPagar contasPagar)
         {
             _context.ContasPagar.Add(contasPagar);
@@ -90,6 +99,10 @@ namespace GoFinance.Data.Repository
 
         #region Parcelas
 
+        public IQueryable<Parcela> ObterParcelas()
+        {
+            return _context.Parcelas;
+        }
 
         public void Adicionar(Parcela parcela)
         {
@@ -114,9 +127,6 @@ namespace GoFinance.Data.Repository
             _context.Dispose();
         }
 
-        public IQueryable<ContasPagar> ObterContaPagar()
-        {
-            return _context.ContasPagar;
-        }
-    }
+    }   
 }
+
