@@ -113,6 +113,10 @@ namespace GoFinance.Data.Repository
         {
             _context.Dispose();
         }
-        
+
+        public IQueryable<ContasPagar> ObterContaPagar()
+        {
+            return _context.ContasPagar;
+        }
     }
 }

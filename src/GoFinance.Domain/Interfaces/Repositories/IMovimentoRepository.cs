@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GoFinance.Domain.Core.Data;
 using GoFinance.Domain.Entities;
@@ -18,6 +19,7 @@ namespace GoFinance.Domain.Interfaces.Repositories
         //ContaPagar
         Task<IEnumerable<ContasPagar>> ObterTodosContaPagar(Guid usuarioId);
         Task<IEnumerable<ContasPagar>> ObterContaPagarPorCategoria(Guid categoriaId);
+        IQueryable<ContasPagar> ObterContaPagar();
         Task<ContasPagar> ObterContaPagarPorId(Guid id);
         void Adicionar(ContasPagar contasPagar);
         void Atualizar(ContasPagar contasPagar);

@@ -18,13 +18,14 @@ namespace GoFinance.Domain.Entities
         //Ef
         public ICollection<ContasPagar> ContasPagar { get; private set; }
 
-        public Fornecedor(string nome, string urlSite, string descricao, bool ativo, Guid usuarioId)
+        public Fornecedor(string nome, string urlSite, string descricao, bool ativo, Guid usuarioId, CnpjCpf cnpjCpf)
         {
             Nome = nome;
             UrlSite = urlSite;
             Descricao = descricao;
             Ativo = ativo;
             UsuarioId = usuarioId;
+            CnpjCpf = cnpjCpf;
 
             Validar();
         }
@@ -32,6 +33,16 @@ namespace GoFinance.Domain.Entities
         public override string ToString()
         {
             return $"{ CnpjCpf} { Nome }";
+        }
+
+        public void Atualizar(CnpjCpf cnpjCpf, string nome, string urlSite, string descricao)
+        {
+            Nome = nome;
+            UrlSite = urlSite;
+            Descricao = descricao;
+            CnpjCpf = cnpjCpf;
+
+            Validar();
         }
 
         public void Ativar() => Ativo = true;
