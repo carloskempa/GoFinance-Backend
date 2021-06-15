@@ -32,6 +32,18 @@ namespace GoFinance.Domain.Entities
         public void Ativar() => Ativo = true;
         public void Desativar() => Ativo = false;
 
+        public void Atualizar(Email email, string mascara, string host, int porta, string usuario, string senha, bool ssl)
+        {
+            Email = email;
+            Mascara = mascara;
+            Host = host;
+            Porta = porta;
+            Usuario = usuario;
+            Senha = senha;
+            SSL = ssl;
+
+            Validar();
+        }
         public override void Validar()
         {
             Validacoes.ValidarSeVazio(Mascara, "O campo máscara não pode ser vazio.");

@@ -1,4 +1,5 @@
-﻿using GoFinance.Domain.Core.Messages;
+﻿using GoFinance.Application.Validators;
+using GoFinance.Domain.Core.Messages;
 using System;
 
 namespace GoFinance.Application.Commands
