@@ -58,7 +58,11 @@ namespace GoFinance.Domain.Entities
 
         public void DebitarSaldo(decimal valor)
         {
-            Validacoes.ValidarSeIgual(valor, 0, "O valor não deve ser negativo.");
+            Validacoes.ValidarSeIgual(valor, 0, "O valor do debito não deve ser zero.");
+
+            if (valor > Saldo)
+                throw new DomainException("Saldo infuficiente"); ;
+
             Saldo -= valor;
         }
     }

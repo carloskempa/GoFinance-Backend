@@ -1,4 +1,5 @@
 ﻿using GoFinance.Application.Commands;
+using GoFinance.Application.Events;
 using GoFinance.Domain.Core.Communication.Mediator;
 using GoFinance.Domain.Entities;
 using GoFinance.Domain.Interfaces.Repositories;
@@ -12,10 +13,12 @@ namespace GoFinance.Application.Handler.Commands
 {
     public class ContaFinanceiraCommandHandler : HandlerBase, IRequestHandler<AdicionarContaFinanceiraCommand, bool>,
                                                               IRequestHandler<AtualizarContaFinanceiraCommand, bool>,
-                                                              IRequestHandler<DeletarContaFinanceiraCommand, bool>
+                                                              IRequestHandler<DeletarContaFinanceiraCommand, bool>,
+                                                              IRequestHandler<DepositarSaldoCommand, bool>,
+                                                              IRequestHandler<SaquarSaldoContaFinanceiraCommand, bool>
     {
 
-        private readonly IContaFinanceiraRepository  _contaFinanceiraRepository;
+        private readonly IContaFinanceiraRepository _contaFinanceiraRepository;
         private readonly IMovimentoRepository _movimentoRepository;
 
         public ContaFinanceiraCommandHandler(IContaFinanceiraRepository contaFinanceiraRepository, IMovimentoRepository movimentoRepository, IMediatorHandler mediatorHandler) : base(mediatorHandler)
@@ -29,7 +32,7 @@ namespace GoFinance.Application.Handler.Commands
             if (!ValidarComando(request))
                 return false;
 
-            var contaFinanceira = new ContaFinanceira(request.Nome, request.Banco, request.Descricao, request.Saldo,true, request.UsuarioId);
+            var contaFinanceira = new ContaFinanceira(request.Nome, request.Banco, request.Descricao, request.Saldo, true, request.UsuarioId);
             _contaFinanceiraRepository.Adicionar(contaFinanceira);
 
             return await Commit(_contaFinanceiraRepository.UnitOfWork);
@@ -42,7 +45,7 @@ namespace GoFinance.Application.Handler.Commands
 
             var contaFinanceira = await _contaFinanceiraRepository.ObterPorId(request.ContaFinanceiraId, request.UsuarioId);
 
-            if(contaFinanceira == null)
+            if (contaFinanceira == null)
             {
                 await AdicionarEventError(request.MessageType, "Conta Financeira não encontrado");
                 return false;
@@ -84,6 +87,55 @@ namespace GoFinance.Application.Handler.Commands
 
 
             return await Commit(_contaFinanceiraRepository.UnitOfWork);
+        }
+
+        public async Task<bool> Handle(DepositarSaldoCommand request, CancellationToken cancellationToken)
+        {
+            if (!ValidarComando(request))
+                return false;
+
+            var contaFinanceira = await _contaFinanceiraRepository.ObterPorId(request.ContaFinanceiraId, request.UsuarioId);
+
+            if (contaFinanceira == null)
+            {
+                await AdicionarEventError(request.MessageType, "Conta Financeira não encontrado");
+                return false;
+            }
+
+            contaFinanceira.AdicionarSaldo(request.Valor);
+            _contaFinanceiraRepository.Atualizar(contaFinanceira);
+
+            var result = await Commit(_contaFinanceiraRepository.UnitOfWork);
+
+            if (result)
+                contaFinanceira.AdicionarEvento(new AdicionarMovimentoFinanceiroEvent(request.ContaFinanceiraId, request.UsuarioId, request.Valor));
+
+            return true;
+        }
+
+        public async Task<bool> Handle(SaquarSaldoContaFinanceiraCommand request, CancellationToken cancellationToken)
+        {
+            if (!ValidarComando(request))
+                return false;
+
+            var contaFinanceira = await _contaFinanceiraRepository.ObterPorId(request.ContaFinanceiraId, request.UsuarioId);
+
+            if (contaFinanceira == null)
+            {
+                await AdicionarEventError(request.MessageType, "Conta Financeira não encontrado");
+                return false;
+            }
+
+            contaFinanceira.DebitarSaldo(request.Valor);
+            _contaFinanceiraRepository.Atualizar(contaFinanceira);
+
+            var result = await Commit(_contaFinanceiraRepository.UnitOfWork);
+
+            if (result)
+                contaFinanceira.AdicionarEvento(new SaquarMovimentoEvent(request.ContaFinanceiraId, request.UsuarioId, request.Valor));
+
+
+            return true;
         }
     }
 }

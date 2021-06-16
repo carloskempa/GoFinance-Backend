@@ -42,7 +42,7 @@ namespace GoFinance.Domain.Entities
 
         public static class MovimentoFactory
         {
-            public static Movimento Deposito(Guid contaFinanceira, decimal valor)
+            public static Movimento Deposito(Guid contaFinanceira, decimal valor, Guid usuarioId)
             {
                 var movimento = new Movimento
                 {
@@ -50,6 +50,7 @@ namespace GoFinance.Domain.Entities
                     Valor = valor,
                     DtMovimento = DateTime.Now,
                     TipoMovimento = TipoMovimento.Entrada,
+                    UsuarioId = usuarioId
                 };
 
                 movimento.NomeDescritivo = $"Entrada | Depósito em conta {movimento.DtMovimento:dd/MM/yyyy}";
@@ -57,7 +58,7 @@ namespace GoFinance.Domain.Entities
 
                 return movimento;
             }
-            public static Movimento Pagamento(Guid contaFinanceiraId, Parcela contasPagar)
+            public static Movimento Pagamento(Guid contaFinanceiraId, Parcela contasPagar, Guid usuarioId)
             {
                 var movimento = new Movimento
                 {
@@ -65,6 +66,7 @@ namespace GoFinance.Domain.Entities
                     Valor = contasPagar.Valor,
                     DtMovimento = DateTime.Now,
                     TipoMovimento = TipoMovimento.Saida,
+                    UsuarioId = usuarioId
                 };
 
                 movimento.NomeDescritivo = $"Saída | Pagamento Parcela [{contasPagar.NomeDescritivo}]";
@@ -72,7 +74,7 @@ namespace GoFinance.Domain.Entities
 
                 return movimento;
             }
-            public static Movimento Saque(Guid contaFinanceiraId, decimal valor)
+            public static Movimento Saque(Guid contaFinanceiraId, decimal valor, Guid usuarioId)
             {
                 var movimento = new Movimento
                 {
@@ -80,6 +82,7 @@ namespace GoFinance.Domain.Entities
                     Valor = valor,
                     DtMovimento = DateTime.Now,
                     TipoMovimento = TipoMovimento.Saida,
+                    UsuarioId = usuarioId
                 };
 
                 movimento.NomeDescritivo = $"Saída | Saque da Conta Financeira";
