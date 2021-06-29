@@ -61,7 +61,7 @@ namespace GoFinance.Domain.Entities
             Validacoes.ValidarSeIgual(valor, 0, "O valor do debito não deve ser zero.");
 
             if (valor > Saldo)
-                throw new DomainException("Saldo infuficiente"); ;
+                throw new DomainException("Saldo insuficiente"); ;
 
             Saldo -= valor;
         }

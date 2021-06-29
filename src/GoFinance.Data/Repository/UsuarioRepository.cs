@@ -67,15 +67,13 @@ namespace GoFinance.Data.Repository
         #endregion
 
         #region Categoria
-
+        public IQueryable<Categoria> ObterCategorias()
+        {
+            return  _context.Categorias;
+        }
         public async Task<Categoria> ObterCategoriaPorId(Guid id, Guid usuarioId)
         {
             return await _context.Categorias.FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == usuarioId);
-        }
-
-        public async Task<IEnumerable<Categoria>> ObterCategorias()
-        {
-            return await _context.Categorias.AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<Categoria>> ObterCategorias(Guid usuarioId)
@@ -140,5 +138,6 @@ namespace GoFinance.Data.Repository
         {
             _context.Dispose();
         }
+      
     }
 }

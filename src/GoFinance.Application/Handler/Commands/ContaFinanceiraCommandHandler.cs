@@ -15,7 +15,7 @@ namespace GoFinance.Application.Handler.Commands
                                                               IRequestHandler<AtualizarContaFinanceiraCommand, bool>,
                                                               IRequestHandler<DeletarContaFinanceiraCommand, bool>,
                                                               IRequestHandler<DepositarSaldoCommand, bool>,
-                                                              IRequestHandler<SaquarSaldoContaFinanceiraCommand, bool>
+                                                              IRequestHandler<SacarSaldoContaFinanceiraCommand, bool>
     {
 
         private readonly IContaFinanceiraRepository _contaFinanceiraRepository;
@@ -113,7 +113,7 @@ namespace GoFinance.Application.Handler.Commands
             return true;
         }
 
-        public async Task<bool> Handle(SaquarSaldoContaFinanceiraCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(SacarSaldoContaFinanceiraCommand request, CancellationToken cancellationToken)
         {
             if (!ValidarComando(request))
                 return false;
@@ -132,7 +132,7 @@ namespace GoFinance.Application.Handler.Commands
             var result = await Commit(_contaFinanceiraRepository.UnitOfWork);
 
             if (result)
-                contaFinanceira.AdicionarEvento(new SaquarMovimentoEvent(request.ContaFinanceiraId, request.UsuarioId, request.Valor));
+                contaFinanceira.AdicionarEvento(new SacarMovimentoEvent(request.ContaFinanceiraId, request.UsuarioId, request.Valor));
 
 
             return true;

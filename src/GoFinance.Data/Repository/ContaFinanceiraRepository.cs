@@ -1,12 +1,12 @@
-﻿using GoFinance.Data.Context;
-using GoFinance.Domain.Core.Data;
-using GoFinance.Domain.Entities;
-using GoFinance.Domain.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using GoFinance.Data.Context;
+using GoFinance.Domain.Entities;
+using GoFinance.Domain.Core.Data;
+using Microsoft.EntityFrameworkCore;
+using GoFinance.Domain.Interfaces.Repositories;
 
 namespace GoFinance.Data.Repository
 {
@@ -30,6 +30,11 @@ namespace GoFinance.Data.Repository
         {
             return await _context.ContasFinanceiras.AsNoTracking().Where(c => c.UsuarioId == usuarioId).ToListAsync();
         }
+        
+        public async Task<ContaFinanceira> ObterPorId(Guid id)
+        {
+            return await _context.ContasFinanceiras.FindAsync(id);
+        }
 
         public void Adicionar(ContaFinanceira contaFinanceira)
         {
@@ -45,10 +50,11 @@ namespace GoFinance.Data.Repository
         {
             _context.ContasFinanceiras.Remove(contaFinanceira);
         }
-
+       
         public void Dispose()
         {
             _context.Dispose();
         }
+
     }
 }

@@ -15,8 +15,8 @@ namespace GoFinance.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("GoFinance.Domain.Entities.Categoria", b =>
@@ -26,21 +26,21 @@ namespace GoFinance.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnName("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Ativo");
 
                     b.Property<int>("Codigo")
-                        .HasColumnName("Codigo")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Codigo");
 
                     b.Property<DateTime>("DtCadastro")
-                        .HasColumnName("DtCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtCadastro");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnName("Nome")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Nome");
 
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
@@ -59,30 +59,30 @@ namespace GoFinance.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnName("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Ativo");
 
                     b.Property<string>("Banco")
                         .IsRequired()
-                        .HasColumnName("Banco")
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("Banco");
 
                     b.Property<string>("Descricao")
-                        .HasColumnName("Descricao")
-                        .HasColumnType("varchar(500)");
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("Descricao");
 
                     b.Property<DateTime>("DtCadastro")
-                        .HasColumnName("DtCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtCadastro");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnName("Nome")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Nome");
 
                     b.Property<decimal>("Saldo")
-                        .HasColumnName("Saldo")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Saldo");
 
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
@@ -104,31 +104,31 @@ namespace GoFinance.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DtCadastro")
-                        .HasColumnName("DtCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtCadastro");
 
-                    b.Property<Guid>("FornecedorId")
+                    b.Property<Guid?>("FornecedorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnName("Nome")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Nome");
 
                     b.Property<int>("NumeroParcelas")
-                        .HasColumnName("NumeroParcelas")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("NumeroParcelas");
 
                     b.Property<string>("Observacoes")
-                        .HasColumnName("Observacoes")
-                        .HasColumnType("varchar(500)");
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("Observacoes");
 
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("ValorTotal")
-                        .HasColumnName("ValorTotal")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("ValorTotal");
 
                     b.HasKey("Id");
 
@@ -148,25 +148,25 @@ namespace GoFinance.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnName("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Ativo");
 
                     b.Property<string>("Descricao")
-                        .HasColumnName("Descricao")
-                        .HasColumnType("varchar(500)");
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("Descricao");
 
                     b.Property<DateTime>("DtCadastro")
-                        .HasColumnName("DtCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtCadastro");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnName("Nome")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Nome");
 
                     b.Property<string>("UrlSite")
-                        .HasColumnName("UrlSite")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("UrlSite");
 
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
@@ -191,32 +191,32 @@ namespace GoFinance.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descricao")
-                        .HasColumnName("Descricao")
-                        .HasColumnType("varchar(500)");
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("Descricao");
 
                     b.Property<DateTime>("DtCadastro")
-                        .HasColumnName("DtCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtCadastro");
 
                     b.Property<DateTime>("DtMovimento")
-                        .HasColumnName("DtMovimento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtMovimento");
 
                     b.Property<string>("NomeDescritivo")
                         .IsRequired()
-                        .HasColumnName("NomeDescritivo")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("NomeDescritivo");
 
                     b.Property<int>("TipoMovimento")
-                        .HasColumnName("TipoMovimento")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("TipoMovimento");
 
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnName("Valor")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Valor");
 
                     b.HasKey("Id");
 
@@ -242,49 +242,45 @@ namespace GoFinance.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("Desconto")
-                        .HasColumnName("Desconto")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Desconto");
 
                     b.Property<DateTime>("DtCadastro")
-                        .HasColumnName("DtCadastro")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("DtCompetencia")
-                        .HasColumnName("DtCompetencia")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtCadastro");
 
                     b.Property<DateTime?>("DtPagamento")
-                        .HasColumnName("DtPagamento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtPagamento");
 
                     b.Property<DateTime>("DtVencimento")
-                        .HasColumnName("DtVencimento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtVencimento");
 
                     b.Property<decimal?>("Juros")
-                        .HasColumnName("Juros")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Juros");
 
                     b.Property<decimal?>("Multa")
-                        .HasColumnName("Multa")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Multa");
 
                     b.Property<string>("NomeDescritivo")
                         .IsRequired()
-                        .HasColumnName("NomeDescritivo")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("NomeDescritivo");
 
                     b.Property<int>("NumeroParcela")
-                        .HasColumnName("NumeroParcela")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("NumeroParcela");
 
                     b.Property<int>("StatusParcela")
-                        .HasColumnName("StatusParcela")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("StatusParcela");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnName("Valor")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Valor");
 
                     b.HasKey("Id");
 
@@ -302,40 +298,40 @@ namespace GoFinance.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnName("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Ativo");
 
                     b.Property<DateTime>("DtCadastro")
-                        .HasColumnName("DtCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtCadastro");
 
                     b.Property<string>("Host")
                         .IsRequired()
-                        .HasColumnName("Host")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(150)")
+                        .HasColumnName("Host");
 
                     b.Property<string>("Mascara")
                         .IsRequired()
-                        .HasColumnName("Nome")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Nome");
 
                     b.Property<int>("Porta")
-                        .HasColumnName("Porta")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Porta");
 
                     b.Property<bool>("SSL")
-                        .HasColumnName("SSL")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("SSL");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasColumnName("Senha")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Senha");
 
                     b.Property<string>("Usuario")
                         .IsRequired()
-                        .HasColumnName("Usuario")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(150)")
+                        .HasColumnName("Usuario");
 
                     b.HasKey("Id");
 
@@ -349,47 +345,47 @@ namespace GoFinance.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Administrador")
-                        .HasColumnName("Administrador")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Administrador");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnName("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Ativo");
 
                     b.Property<DateTime?>("DataExpiracaoRefleshToken")
-                        .HasColumnName("DataExpiracaoRefleshToken")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DataExpiracaoRefleshToken");
 
                     b.Property<DateTime?>("DataExpiracaoToken")
-                        .HasColumnName("DataExpiracaoToken")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DataExpiracaoToken");
 
                     b.Property<DateTime>("DtCadastro")
-                        .HasColumnName("DtCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("DtCadastro");
 
                     b.Property<string>("Login")
                         .IsRequired()
-                        .HasColumnName("Login")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("Login");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnName("Nome")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Nome");
 
                     b.Property<string>("RefleshToken")
-                        .HasColumnName("RefleshToken")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("RefleshToken");
 
                     b.Property<byte[]>("Senha")
                         .IsRequired()
-                        .HasColumnName("Senha")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("Senha");
 
                     b.Property<string>("TokenAlteracaoSenha")
-                        .HasColumnName("TokenAlteracaoSenha")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("TokenAlteracaoSenha");
 
                     b.HasKey("Id");
 
@@ -403,6 +399,8 @@ namespace GoFinance.Data.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("GoFinance.Domain.Entities.ContaFinanceira", b =>
@@ -412,6 +410,8 @@ namespace GoFinance.Data.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("GoFinance.Domain.Entities.ContasPagar", b =>
@@ -425,14 +425,19 @@ namespace GoFinance.Data.Migrations
                     b.HasOne("GoFinance.Domain.Entities.Fornecedor", "Fornecedor")
                         .WithMany("ContasPagar")
                         .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("GoFinance.Domain.Entities.Usuario", "Usuario")
                         .WithMany("ContasPagar")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Fornecedor");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("GoFinance.Domain.Entities.Fornecedor", b =>
@@ -449,8 +454,8 @@ namespace GoFinance.Data.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("NumeroDocumento")
-                                .HasColumnName("NumeroDocumento")
-                                .HasColumnType("varchar(14)");
+                                .HasColumnType("varchar(14)")
+                                .HasColumnName("NumeroDocumento");
 
                             b1.HasKey("FornecedorId");
 
@@ -459,6 +464,10 @@ namespace GoFinance.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("FornecedorId");
                         });
+
+                    b.Navigation("CnpjCpf");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("GoFinance.Domain.Entities.Movimento", b =>
@@ -476,6 +485,12 @@ namespace GoFinance.Data.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ContaFinanceira");
+
+                    b.Navigation("ContasPagar");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("GoFinance.Domain.Entities.Parcela", b =>
@@ -489,6 +504,10 @@ namespace GoFinance.Data.Migrations
                         .HasForeignKey("ContaPagarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ContaFinanceira");
+
+                    b.Navigation("ContaPagar");
                 });
 
             modelBuilder.Entity("GoFinance.Domain.Entities.Smtp", b =>
@@ -499,8 +518,8 @@ namespace GoFinance.Data.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("Endereco")
-                                .HasColumnName("Email")
-                                .HasColumnType("varchar(200)");
+                                .HasColumnType("varchar(200)")
+                                .HasColumnName("Email");
 
                             b1.HasKey("SmtpId");
 
@@ -509,6 +528,8 @@ namespace GoFinance.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("SmtpId");
                         });
+
+                    b.Navigation("Email");
                 });
 
             modelBuilder.Entity("GoFinance.Domain.Entities.Usuario", b =>
@@ -519,8 +540,8 @@ namespace GoFinance.Data.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("Endereco")
-                                .HasColumnName("Email")
-                                .HasColumnType("varchar(200)");
+                                .HasColumnType("varchar(200)")
+                                .HasColumnName("Email");
 
                             b1.HasKey("UsuarioId");
 
@@ -529,6 +550,45 @@ namespace GoFinance.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("UsuarioId");
                         });
+
+                    b.Navigation("Email");
+                });
+
+            modelBuilder.Entity("GoFinance.Domain.Entities.Categoria", b =>
+                {
+                    b.Navigation("ContasPagar");
+                });
+
+            modelBuilder.Entity("GoFinance.Domain.Entities.ContaFinanceira", b =>
+                {
+                    b.Navigation("Movimentos");
+
+                    b.Navigation("Parcelas");
+                });
+
+            modelBuilder.Entity("GoFinance.Domain.Entities.ContasPagar", b =>
+                {
+                    b.Navigation("Movimentos");
+
+                    b.Navigation("Parcelas");
+                });
+
+            modelBuilder.Entity("GoFinance.Domain.Entities.Fornecedor", b =>
+                {
+                    b.Navigation("ContasPagar");
+                });
+
+            modelBuilder.Entity("GoFinance.Domain.Entities.Usuario", b =>
+                {
+                    b.Navigation("Categorias");
+
+                    b.Navigation("ContaFinanceiras");
+
+                    b.Navigation("ContasPagar");
+
+                    b.Navigation("Fornecedores");
+
+                    b.Navigation("Movimentacoes");
                 });
 #pragma warning restore 612, 618
         }

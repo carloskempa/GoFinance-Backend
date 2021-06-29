@@ -6,9 +6,9 @@ using System.Text;
 
 namespace GoFinance.Application.Commands
 {
-    public class SaquarSaldoContaFinanceiraCommand : Command
+    public class SacarSaldoContaFinanceiraCommand : Command
     {
-        public SaquarSaldoContaFinanceiraCommand(Guid contaFinanceiraId, Guid usuarioId, decimal valor)
+        public SacarSaldoContaFinanceiraCommand(Guid contaFinanceiraId, Guid usuarioId, decimal valor)
         {
             ContaFinanceiraId = contaFinanceiraId;
             UsuarioId = usuarioId;
@@ -26,7 +26,7 @@ namespace GoFinance.Application.Commands
         }
 
     }
-    public class DepositarSaquarSaldoValidator : AbstractValidator<SaquarSaldoContaFinanceiraCommand>
+    public class DepositarSaquarSaldoValidator : AbstractValidator<SacarSaldoContaFinanceiraCommand>
     {
         public DepositarSaquarSaldoValidator()
         {

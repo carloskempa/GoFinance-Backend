@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GoFinance.Domain.Core.Data;
 using GoFinance.Domain.Entities;
@@ -21,7 +22,7 @@ namespace GoFinance.Domain.Interfaces.Repositories
 
 
         //Categoria
-        Task<IEnumerable<Categoria>> ObterCategorias();
+        IQueryable<Categoria> ObterCategorias();
         Task<IEnumerable<Categoria>> ObterCategorias(Guid usuarioId);
         Task<Categoria> ObterCategoriaPorId(Guid id, Guid usuarioId);
         void Adicionar(Categoria categoria);

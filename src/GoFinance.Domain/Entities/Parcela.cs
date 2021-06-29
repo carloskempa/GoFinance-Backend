@@ -6,12 +6,11 @@ namespace GoFinance.Domain.Entities
 {
     public class Parcela : Entity
     {
-        public Parcela(string nomeDescritivo,int numeroParcela, decimal valor, DateTime dtCompetencia, DateTime dtVencimento)
+        public Parcela(string nomeDescritivo,int numeroParcela, decimal valor, DateTime dtVencimento)
         {
             NomeDescritivo = nomeDescritivo;
             NumeroParcela = numeroParcela;
             Valor = valor;
-            DtCompetencia = dtCompetencia;
             DtVencimento = dtVencimento;
             StatusParcela = StatusParcela.Aberto;
 
@@ -26,7 +25,6 @@ namespace GoFinance.Domain.Entities
         public decimal? Multa { get; private set; }
         public decimal? Juros { get; private set; }
         public StatusParcela StatusParcela { get; private set; }
-        public DateTime DtCompetencia { get; private set; }
         public DateTime? DtPagamento { get; private set; }
         public DateTime DtVencimento { get; private set; }
         public Guid? ContaFinanceiraId { get; private set; }

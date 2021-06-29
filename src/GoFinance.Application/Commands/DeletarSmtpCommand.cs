@@ -15,7 +15,7 @@ namespace GoFinance.Application.Commands
 
         public override bool EhValido()
         {
-            ValidationResult = new DeletarContaFinanceiraValidator().Validate(this);
+            ValidationResult = new DeletarSmtpValidador().Validate(this);
             return ValidationResult.IsValid;
         }
     }

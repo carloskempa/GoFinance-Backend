@@ -30,6 +30,8 @@ namespace GoFinance.Service
             services.AddControllers();
 
             services.AddDependencies(Configuration);
+            services.AddAutoMappers(Configuration);
+
             services.AddSwaggerDoc();
             services.AddJwt(Configuration);
 

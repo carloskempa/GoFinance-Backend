@@ -65,7 +65,7 @@ namespace GoFinance.Application.Handler.Commands
                 return false;
             }
 
-            var contasPagar = await _movimentoRepository.ObterContaPagar().Where(c => c.FornecedorId == request.FornecedorId).ToListAsync();
+            var contasPagar = await _movimentoRepository.ObterContasPagar().Where(c => c.FornecedorId == request.FornecedorId).ToListAsync();
             fornecedor.Desativar();
 
             if (contasPagar.Any())

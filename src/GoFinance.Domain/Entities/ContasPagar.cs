@@ -6,7 +6,7 @@ namespace GoFinance.Domain.Entities
 {
     public class ContasPagar : Entity
     {
-        public ContasPagar(string nome, int numeroParcelas, decimal valorTotal, string observacoes, Guid categoriaId, Guid usuarioId, Guid fornecedorId)
+        public ContasPagar(string nome, int numeroParcelas, decimal valorTotal, string observacoes, Guid categoriaId, Guid usuarioId, Guid? fornecedorId)
         {
             Nome = nome;
             NumeroParcelas = numeroParcelas;
@@ -26,7 +26,7 @@ namespace GoFinance.Domain.Entities
         public string Observacoes { get; private set; }
         public Guid CategoriaId { get; private set; }
         public Guid UsuarioId { get; private set; }
-        public Guid FornecedorId { get; private set; }
+        public Guid? FornecedorId { get; private set; }
         public Categoria Categoria { get; private set; }
         public Usuario Usuario { get; private set; }
         public Fornecedor Fornecedor { get; private set; }
@@ -47,7 +47,6 @@ namespace GoFinance.Domain.Entities
         {
             Validacoes.ValidarSeVazio(Nome, "Nome do movimento deve ser preenchido.");
             Validacoes.ValidarSeIgual(CategoriaId,Guid.Empty, "O Campo da Categoria deve ser preenchida.");
-            Validacoes.ValidarSeIgual(FornecedorId, Guid.Empty, "O Campo fornecedor deve ser preenchido.");
             Validacoes.ValidarSeIgual(UsuarioId, Guid.Empty, "O UsuarioId deve ser preenchido.");
             Validacoes.ValidarSeIgual(ValorTotal, 0, "Valor da movimentação deve ser maior que 0.");
             Validacoes.ValidarTamanho(Observacoes, 500, "O campo observações pode ter no maximo 500 caracteres.");

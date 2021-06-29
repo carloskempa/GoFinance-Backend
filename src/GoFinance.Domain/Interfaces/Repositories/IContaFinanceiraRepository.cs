@@ -10,6 +10,7 @@ namespace GoFinance.Domain.Interfaces.Repositories
     {
         Task<IEnumerable<ContaFinanceira>> ObterTodos(Guid usuarioId);
         Task<ContaFinanceira> ObterPorId(Guid id, Guid usuarioId);
+        Task<ContaFinanceira> ObterPorId(Guid id);
 
         void Adicionar(ContaFinanceira contaFinanceira);
         void Atualizar(ContaFinanceira contaFinanceira);

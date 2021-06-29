@@ -48,8 +48,6 @@ namespace GoFinance.Data.Repository
             _context.Movimentos.Update(movimento);
         }
 
-
-
         #endregion
 
         #region ContasPagar
@@ -98,6 +96,14 @@ namespace GoFinance.Data.Repository
         #endregion
 
         #region Parcelas
+        
+        public async Task<Parcela> ObterPorParcelaId(Guid id)
+        {
+            var parcela = await _context.Parcelas.FindAsync(id);
+            await _context.Entry(parcela).Reference(c => c.ContaPagar).LoadAsync();
+            
+            return parcela;
+        }
 
         public IQueryable<Parcela> ObterParcelas()
         {
@@ -109,12 +115,17 @@ namespace GoFinance.Data.Repository
             _context.Parcelas.Add(parcela);
         }
 
-        public void AdicionarTodos(IEnumerable<Parcela> parcelas)
+        public void AdicionarTodos(List<Parcela> parcelas)
         {
             _context.Parcelas.AddRange(parcelas);
         }
 
-        public void DeletarTodos(IEnumerable<Parcela> parcelas)
+        public void Atualizar(Parcela parcela)
+        {
+            _context.Parcelas.Update(parcela);
+        }
+
+        public void DeletarTodos(List<Parcela> parcelas)
         {
             _context.Parcelas.RemoveRange(parcelas);
         }
@@ -126,7 +137,7 @@ namespace GoFinance.Data.Repository
         {
             _context.Dispose();
         }
-
+     
     }   
 }
 

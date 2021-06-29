@@ -41,8 +41,9 @@ namespace GoFinance.Data.Mapping
 
             builder.HasOne(c => c.Fornecedor)
                    .WithMany(c => c.ContasPagar)
-                   .HasForeignKey(c => c. FornecedorId)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .HasForeignKey(c => c.FornecedorId)
+                   .OnDelete(DeleteBehavior.Restrict)
+                   .IsRequired(false);
 
             builder.Property(c => c.DtCadastro)
                    .IsRequired()

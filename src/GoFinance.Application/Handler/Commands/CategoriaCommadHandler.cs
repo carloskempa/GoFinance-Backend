@@ -1,7 +1,5 @@
 ﻿using GoFinance.Application.Commands;
 using GoFinance.Domain.Core.Communication.Mediator;
-using GoFinance.Domain.Core.Messages;
-using GoFinance.Domain.Core.Messages.CommonMessages.Notifications;
 using GoFinance.Domain.Entities;
 using GoFinance.Domain.Interfaces.Repositories;
 using MediatR;
@@ -11,24 +9,23 @@ using System.Threading.Tasks;
 
 namespace GoFinance.Application.Handler.Commands
 {
-    public class CategoriaCommadHandler : IRequestHandler<AdicionarCategoriaCommand, bool>,
-                                          IRequestHandler<AtualizarCategoriaCommand, bool>,
-                                          IRequestHandler<DeletarCategoriaCommad, bool>
+    public class CategoriaCommadHandler : HandlerBase, IRequestHandler<AdicionarCategoriaCommand, bool>,
+                                                       IRequestHandler<AtualizarCategoriaCommand, bool>,
+                                                       IRequestHandler<DeletarCategoriaCommad, bool>
     {
         private readonly IUsuarioRepository _usuarioRepository;
-        private readonly IMediatorHandler _mediatorHandler;
         private readonly IMovimentoRepository _movimentoRepository;
 
-        public CategoriaCommadHandler(IUsuarioRepository usuarioRepository, IMediatorHandler mediatorHandler, IMovimentoRepository movimentoRepository)
+        public CategoriaCommadHandler(IUsuarioRepository usuarioRepository, IMediatorHandler mediatorHandler, IMovimentoRepository movimentoRepository) : base(mediatorHandler)
         {
             _usuarioRepository = usuarioRepository;
-            _mediatorHandler = mediatorHandler;
             _movimentoRepository = movimentoRepository;
         }
 
         public async Task<bool> Handle(AdicionarCategoriaCommand request, CancellationToken cancellationToken)
         {
-            if (!ValidarComando(request)) return false;
+            if (!ValidarComando(request))
+                return false;
 
             var categoria = new Categoria(request.Nome, request.Codigo, true, request.UsuarioId);
             _usuarioRepository.Adicionar(categoria);
@@ -38,31 +35,33 @@ namespace GoFinance.Application.Handler.Commands
 
         public async Task<bool> Handle(AtualizarCategoriaCommand request, CancellationToken cancellationToken)
         {
-            if (!ValidarComando(request)) return false;
+            if (!ValidarComando(request))
+                return false;
 
             var categoria = await _usuarioRepository.ObterCategoriaPorId(request.CategoriaId, request.UsuarioId);
 
             if (categoria == null)
             {
-                await _mediatorHandler.PublicarNotificacao(new DomainNotification(request.MessageType, "Categoria não encontrada"));
+                await AdicionarEventError(request.MessageType, "Categoria não encontrada");
                 return false;
             }
 
             categoria.Atualizar(request.Nome, request.Codigo);
             _usuarioRepository.Atualizar(categoria);
 
-            return await _usuarioRepository.UnitOfWork.Commit();
+            return await Commit(_usuarioRepository.UnitOfWork);
         }
 
         public async Task<bool> Handle(DeletarCategoriaCommad request, CancellationToken cancellationToken)
         {
-            if (!ValidarComando(request)) return false;
+            if (!ValidarComando(request))
+                return false;
 
             var categoria = await _usuarioRepository.ObterCategoriaPorId(request.CategoriaId, request.UsuarioId);
 
             if (categoria == null)
             {
-                await _mediatorHandler.PublicarNotificacao(new DomainNotification(request.MessageType, "Categoria não encontrada"));
+                await AdicionarEventError(request.MessageType, "Categoria não encontrada");
                 return false;
             }
 
@@ -78,20 +77,8 @@ namespace GoFinance.Application.Handler.Commands
                 _usuarioRepository.Atualizar(categoria);
             }
 
-            return await _usuarioRepository.UnitOfWork.Commit();
+            return await Commit(_usuarioRepository.UnitOfWork);
         }
 
-        private bool ValidarComando(Command message)
-        {
-            if (message.EhValido())
-                return true;
-
-            foreach (var error in message.ValidationResult.Errors)
-            {
-                _mediatorHandler.PublicarNotificacao(new DomainNotification(message.MessageType, error.ErrorMessage));
-            }
-
-            return false;
-        }
     }
 }

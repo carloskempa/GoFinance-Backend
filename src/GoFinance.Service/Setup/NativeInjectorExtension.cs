@@ -1,10 +1,13 @@
 ﻿using GoFinance.Application.Commands;
 using GoFinance.Application.Events;
 using GoFinance.Application.Handler.Commands;
+using GoFinance.Application.Handler.Event;
+using GoFinance.Application.Queries;
 using GoFinance.Data.Context;
 using GoFinance.Data.Repository;
 using GoFinance.Domain.Core.Communication.Mediator;
 using GoFinance.Domain.Core.Messages.CommonMessages.Notifications;
+using GoFinance.Domain.Interfaces.Queries;
 using GoFinance.Domain.Interfaces.Repositories;
 using GoFinance.Domain.Interfaces.Services;
 using GoFinance.Domain.Services;
@@ -36,11 +39,15 @@ namespace GoFinance.Service.Setup
 
         private static void AddQueries(IServiceCollection services)
         {
+            services.AddScoped<ICategoriaQueries, CategoriaQueries>();
         }
 
         private static void AddEvents(IServiceCollection services)
         {
+            services.AddScoped<INotificationHandler<AdicionarMovimentoFinanceiroEvent>, MovimentoEventHandler>();
             services.AddScoped<INotificationHandler<EnviarEmailResetarSenhaUsuarioEvent>, UsuarioEventHandler>();
+            services.AddScoped<INotificationHandler<PagarParcelaEvent>, MovimentoEventHandler>();
+            services.AddScoped<INotificationHandler<SacarMovimentoEvent>, MovimentoEventHandler>();
         }
 
         public static void AddServices(IServiceCollection services)
@@ -60,12 +67,25 @@ namespace GoFinance.Service.Setup
         private static void AddHandlers(IServiceCollection services)
         {
             services.AddScoped<IRequestHandler<AdicionarCategoriaCommand, bool>, CategoriaCommadHandler>();
+            services.AddScoped<IRequestHandler<AdicionarContaFinanceiraCommand, bool>, ContaFinanceiraCommandHandler>();
+            services.AddScoped<IRequestHandler<AdicionarContasPagarCommand, bool>, ContasPagarCommandHandler>();
+            services.AddScoped<IRequestHandler<AdicionarFornecedorCommand, bool>, FornecedorCommandHandler>();
+            services.AddScoped<IRequestHandler<AdicionarSmtpCommand, bool>, SmtpCommandHandler>();
             services.AddScoped<IRequestHandler<AdicionarUsuarioCommand, bool>, UsuarioCommandHandler>();
             services.AddScoped<IRequestHandler<AtualizarCategoriaCommand, bool>, CategoriaCommadHandler>();
+            services.AddScoped<IRequestHandler<AtualizarContaFinanceiraCommand, bool>, ContaFinanceiraCommandHandler>();
+            services.AddScoped<IRequestHandler<AtualizarFornecedorCommand, bool>, FornecedorCommandHandler>();
+            services.AddScoped<IRequestHandler<AtualizarSmtpCommand, bool>, SmtpCommandHandler>();
             services.AddScoped<IRequestHandler<AtualizarUsuarioCommand, bool>, UsuarioCommandHandler>();
             services.AddScoped<IRequestHandler<AuthenticarUsuarioCommand, bool>, UsuarioCommandHandler>();
             services.AddScoped<IRequestHandler<DeletarCategoriaCommad, bool>, CategoriaCommadHandler>();
+            services.AddScoped<IRequestHandler<DeletarContaFinanceiraCommand, bool>, ContaFinanceiraCommandHandler>();
+            services.AddScoped<IRequestHandler<DeletarFornecedorCommand, bool>, FornecedorCommandHandler>();
+            services.AddScoped<IRequestHandler<DeletarSmtpCommand, bool>, SmtpCommandHandler>();
+            services.AddScoped<IRequestHandler<DepositarSaldoCommand, bool>, ContaFinanceiraCommandHandler>();
+            services.AddScoped<IRequestHandler<PagarParcelaCommand, bool>, ParcelaCommandHandler>();
             services.AddScoped<IRequestHandler<RecuperarSenhaUsuarioCommand, bool>, UsuarioCommandHandler>();
+            services.AddScoped<IRequestHandler<SacarSaldoContaFinanceiraCommand, bool>, ContaFinanceiraCommandHandler>();
             services.AddScoped<IRequestHandler<SolicitarRecuperacaoSenhaUsuarioCommand, bool>, UsuarioCommandHandler>();
         }
     }

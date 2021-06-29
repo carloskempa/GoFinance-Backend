@@ -41,11 +41,6 @@ namespace GoFinance.Data.Mapping
                    .HasColumnName("StatusParcela")
                    .HasColumnType("int");
 
-            builder.Property(c => c.DtCompetencia)
-                   .IsRequired()
-                   .HasColumnName("DtCompetencia")
-                   .HasColumnType("datetime");
-
             builder.Property(c => c.DtPagamento)
                    .HasColumnName("DtPagamento")
                    .HasColumnType("datetime");

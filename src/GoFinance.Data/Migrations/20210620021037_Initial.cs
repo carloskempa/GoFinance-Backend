@@ -11,8 +11,7 @@ namespace GoFinance.Data.Migrations
                 name: "Smtp",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Email = table.Column<string>(type: "varchar(200)", nullable: true),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     Host = table.Column<string>(type: "varchar(150)", nullable: false),
@@ -20,7 +19,8 @@ namespace GoFinance.Data.Migrations
                     Usuario = table.Column<string>(type: "varchar(150)", nullable: false),
                     Senha = table.Column<string>(type: "varchar(100)", nullable: false),
                     SSL = table.Column<bool>(type: "bit", nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,8 +31,7 @@ namespace GoFinance.Data.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     Login = table.Column<string>(type: "varchar(50)", nullable: false),
                     Senha = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
@@ -42,7 +41,8 @@ namespace GoFinance.Data.Migrations
                     DataExpiracaoToken = table.Column<DateTime>(type: "datetime", nullable: true),
                     RefleshToken = table.Column<string>(type: "varchar(100)", nullable: true),
                     DataExpiracaoRefleshToken = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,12 +53,12 @@ namespace GoFinance.Data.Migrations
                 name: "Categorias",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     Codigo = table.Column<int>(type: "int", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    UsuarioId = table.Column<Guid>(nullable: false)
+                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,14 +75,14 @@ namespace GoFinance.Data.Migrations
                 name: "ContaFinanceira",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     Banco = table.Column<string>(type: "varchar(200)", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(500)", nullable: true),
                     Saldo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    UsuarioId = table.Column<Guid>(nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,14 +99,14 @@ namespace GoFinance.Data.Migrations
                 name: "Fornecedores",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     NumeroDocumento = table.Column<string>(type: "varchar(14)", nullable: true),
                     UrlSite = table.Column<string>(type: "varchar(250)", nullable: true),
                     Descricao = table.Column<string>(type: "varchar(500)", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    UsuarioId = table.Column<Guid>(nullable: false)
+                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,15 +123,15 @@ namespace GoFinance.Data.Migrations
                 name: "ContasPagar",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     NumeroParcelas = table.Column<int>(type: "int", nullable: false),
                     ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Observacoes = table.Column<string>(type: "varchar(500)", nullable: true),
-                    CategoriaId = table.Column<Guid>(nullable: false),
-                    UsuarioId = table.Column<Guid>(nullable: false),
-                    FornecedorId = table.Column<Guid>(nullable: false)
+                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FornecedorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -160,16 +160,16 @@ namespace GoFinance.Data.Migrations
                 name: "Movimentos",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NomeDescritivo = table.Column<string>(type: "varchar(250)", nullable: false),
                     DtMovimento = table.Column<DateTime>(type: "datetime", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(500)", nullable: true),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TipoMovimento = table.Column<int>(type: "int", nullable: false),
-                    ContaPagarId = table.Column<Guid>(nullable: true),
-                    ContaFinanceiraId = table.Column<Guid>(nullable: true),
-                    UsuarioId = table.Column<Guid>(nullable: false)
+                    ContaPagarId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ContaFinanceiraId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,8 +198,7 @@ namespace GoFinance.Data.Migrations
                 name: "Parcelas",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NomeDescritivo = table.Column<string>(type: "varchar(250)", nullable: false),
                     NumeroParcela = table.Column<int>(type: "int", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -207,11 +206,11 @@ namespace GoFinance.Data.Migrations
                     Multa = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Juros = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     StatusParcela = table.Column<int>(type: "int", nullable: false),
-                    DtCompetencia = table.Column<DateTime>(type: "datetime", nullable: false),
                     DtPagamento = table.Column<DateTime>(type: "datetime", nullable: true),
                     DtVencimento = table.Column<DateTime>(type: "datetime", nullable: false),
-                    ContaFinanceiraId = table.Column<Guid>(nullable: true),
-                    ContaPagarId = table.Column<Guid>(nullable: false)
+                    ContaFinanceiraId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ContaPagarId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DtCadastro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {

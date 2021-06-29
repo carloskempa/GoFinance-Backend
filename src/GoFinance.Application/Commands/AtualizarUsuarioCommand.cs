@@ -6,13 +6,12 @@ namespace GoFinance.Application.Commands
 {
     public class AtualizarUsuarioCommand : Command
     {
-        public AtualizarUsuarioCommand(Guid usuarioId, string nome, string login, string email, bool administrador, bool ativo)
+        public AtualizarUsuarioCommand(Guid usuarioId, string nome, string login, string email, bool ativo)
         {
             UsuarioId = usuarioId;
             Nome = nome;
             Login = login;
             Email = email;
-            Administrador = administrador;
             Ativo = ativo;
         }
 
@@ -20,7 +19,6 @@ namespace GoFinance.Application.Commands
         public string Nome { get; private set; }
         public string Login { get; private set; }
         public string Email { get; private set; }
-        public bool Administrador { get; private set; }
         public bool Ativo { get; private set; }
 
         public override bool EhValido()

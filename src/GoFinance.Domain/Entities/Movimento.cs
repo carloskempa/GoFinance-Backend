@@ -58,19 +58,19 @@ namespace GoFinance.Domain.Entities
 
                 return movimento;
             }
-            public static Movimento Pagamento(Guid contaFinanceiraId, Parcela contasPagar, Guid usuarioId)
+            public static Movimento Pagamento(Parcela parcela, decimal valorTotal)
             {
                 var movimento = new Movimento
                 {
-                    ContaFinanceiraId = contaFinanceiraId,
-                    Valor = contasPagar.Valor,
+                    ContaFinanceiraId = parcela.ContaFinanceiraId,
+                    Valor = valorTotal,
                     DtMovimento = DateTime.Now,
                     TipoMovimento = TipoMovimento.Saida,
-                    UsuarioId = usuarioId
+                    UsuarioId = parcela.ContaPagar.UsuarioId
                 };
 
-                movimento.NomeDescritivo = $"Saída | Pagamento Parcela [{contasPagar.NomeDescritivo}]";
-                movimento.Descricao = $"Pagamento {contasPagar.Valor} da parcela {contasPagar.NomeDescritivo}, às {movimento.DtMovimento:dd/MM/yyyy HH:mm:ss}";
+                movimento.NomeDescritivo = $"Saída | Pagamento Parcela [{parcela.NomeDescritivo}]";
+                movimento.Descricao = $"Pagamento {valorTotal} da parcela {parcela.NomeDescritivo}, às {movimento.DtMovimento:dd/MM/yyyy HH:mm:ss}";
 
                 return movimento;
             }

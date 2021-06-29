@@ -88,7 +88,7 @@ namespace GoFinance.Application.Handler.Commands
 
             return await _usuarioRepository.UnitOfWork.Commit();
         }
-
+        
         public async Task<bool> Handle(SolicitarRecuperacaoSenhaUsuarioCommand request, CancellationToken cancellationToken)
         {
             if (!ValidarComando(request))
@@ -166,7 +166,7 @@ namespace GoFinance.Application.Handler.Commands
                 return false;
             }
 
-            usuario.Atualizar(request.Nome, request.Login, new Email(request.Email), request.Ativo, request.Administrador);
+            usuario.Atualizar(request.Nome, request.Login, new Email(request.Email), request.Ativo, usuario.Administrador);
             _usuarioRepository.Atualizar(usuario);
 
             return await _usuarioRepository.UnitOfWork.Commit();

@@ -28,8 +28,10 @@ namespace GoFinance.Domain.Interfaces.Repositories
 
         //Parcela
         IQueryable<Parcela> ObterParcelas();
+        Task<Parcela> ObterPorParcelaId(Guid id);
         void Adicionar(Parcela parcela);
-        void AdicionarTodos(IEnumerable<Parcela> parcelas);
-        void DeletarTodos(IEnumerable<Parcela> parcelas);
+        void AdicionarTodos(List<Parcela> parcelas);
+        void Atualizar(Parcela parcela);
+        void DeletarTodos(List<Parcela> parcelas);
     }
 }

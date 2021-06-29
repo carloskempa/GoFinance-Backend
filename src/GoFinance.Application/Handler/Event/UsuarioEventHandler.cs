@@ -1,11 +1,12 @@
-﻿using GoFinance.Domain.Interfaces.Repositories;
+﻿using GoFinance.Application.Events;
+using GoFinance.Domain.Interfaces.Repositories;
 using GoFinance.Domain.Interfaces.Services;
 using GoFinances.Infra.Helpers;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GoFinance.Application.Events
+namespace GoFinance.Application.Handler.Event
 {
     public class UsuarioEventHandler : INotificationHandler<EnviarEmailResetarSenhaUsuarioEvent>
     {
