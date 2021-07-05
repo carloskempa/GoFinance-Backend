@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace GoFinance.Service.Controllers
 {
-    [Route("v1/api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CategoriaController : ControllerBase
     {

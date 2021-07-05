@@ -6,8 +6,9 @@ namespace GoFinance.Application.Commands
 {
     public class AtualizarSmtpCommand : Command
     {
-        public AtualizarSmtpCommand(string email, string mascara, string host, int porta, string usuario, string senha, bool sSL, bool ativo)
+        public AtualizarSmtpCommand(Guid id, string email, string mascara, string host, int porta, string usuario, string senha, bool sSL, bool ativo)
         {
+            SmtpId = id;
             Email = email;
             Mascara = mascara;
             Host = host;
@@ -17,7 +18,7 @@ namespace GoFinance.Application.Commands
             SSL = sSL;
             Ativo = ativo;
         }
-        public Guid SmtpId { get; set; }
+        public Guid SmtpId { get;private set; }
         public string Email { get; private set; }
         public string Mascara { get; private set; }
         public string Host { get; private set; }
@@ -58,9 +59,7 @@ namespace GoFinance.Application.Commands
             RuleFor(c => c.Senha).NotEmpty().WithMessage("O campo senha não pode ser vazio")
                                  .Length(2, 100).WithMessage("O campo senha pode ter no máximo 100 caracters");
 
-
             RuleFor(c => c.Porta).GreaterThan(0).WithMessage("O Campo porta não pode ser menor ou igual a zero");
-
         }
     }
 
